@@ -32,14 +32,13 @@ class PageController: UIViewController {
         super.viewDidLoad()
         
         if let page = page {
-            artworkView.image = page.story.artwork // I don't see an image in Simulator.
-            print(page.story.text) // testing to make sure story is being presented
-            print(page.story.artwork)// Prints <UIImage: 0x600002aebb10>, {320, 568} so I think it's trying, but somehow it's not rendering the image properly.
+            artworkView.image = page.story.artwork
+            storyLabel.text = page.story.text
         }
         // Do any additional setup after loading the view.
     }
     
-    // When ViewController's view is initialized, it checks to see if it has any subviews. It includes the viewDidLayoutSubviews method, which, by default, does nothing, but we can override it to add subviews, that the View will create as it cycles through it's subview setup.
+    // When ViewController's view is initialized, it checks to see if it has any subviews. It includes the viewWillLayoutSubviews method (or was it viewDidLayoutSubviews?), which, by default, does nothing, but we can override it to add subviews, that the View will create as it cycles through it's subview setup.
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews() // notice we call the superclass first, and we've already called super.viewDidLoad()
         view.addSubview(artworkView) // This is how we add a subview.
@@ -48,13 +47,22 @@ class PageController: UIViewController {
         //  artworkView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true // this sets the topAnchor of the artworkView subView to the topAnchor of the View, and makes it active. We could do this for every parameter, but it would get tedious. It's more efficient to use NSLayoutContraint.activate, and pass in an array of constraints. This is how we activate and constrain the subview we just added.
         NSLayoutConstraint.activate([
             artworkView.topAnchor.constraint(equalTo: view.topAnchor),
-            artworkView.bottomAnchor.constraint(equalTo: view.topAnchor),
+            artworkView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             artworkView.rightAnchor.constraint(equalTo: view.rightAnchor),
             artworkView.leftAnchor.constraint(equalTo: view.leftAnchor)
             ])
+        
+        view.addSubview(storyLabel)
+        storyLabel.numberOfLines = 0
+        storyLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            storyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
+            storyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0),
+            storyLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -48.0)
+            ])
+       
     }
-    
-
 }
 
 
