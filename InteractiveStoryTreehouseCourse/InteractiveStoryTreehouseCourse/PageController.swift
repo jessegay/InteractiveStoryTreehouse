@@ -50,6 +50,7 @@ class PageController: UIViewController {
                 firstChoiceButton.addTarget(self, action: #selector(PageController.loadFirstChoice), for: .touchUpInside)//We've manually added a target (self, i.e. this ViewController) and an action (the loadFirstChoice(). This is Target/action pattern.
             } else {
                 firstChoiceButton.setTitle("Play Again", for: .normal)
+                firstChoiceButton.addTarget(self, action: #selector(PageController.playAgain), for: .touchUpInside)
             }
             
             if let secondChoice = page.secondChoice {
@@ -101,7 +102,7 @@ class PageController: UIViewController {
             ])
     }
     
-    // Create helper methods to attach to buttons
+    // Create helper methods to attach to buttons. Swift fix button added the @objc. Don't know why.
     @objc func loadFirstChoice() {
         if let page = page, let firstChoice = page.firstChoice {
             let nextPage = firstChoice.page
@@ -119,6 +120,7 @@ class PageController: UIViewController {
         }
     }
     
+    // Why doesn't this method need @objc ? Oh, prob. cause I haven't connected it to a button yet.
     func loadSecondChoice() {
         if let page = page, let secondChoice = page.secondChoice {
             let nextPage = secondChoice.page
@@ -128,6 +130,9 @@ class PageController: UIViewController {
         }
     }
     
+    @objc func playAgain(){
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 
