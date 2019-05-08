@@ -8,6 +8,41 @@
 
 import UIKit
 
+// Note that we're putting this extension here rather than in the Story file because it's very specific to this page controller and how we use it. Seems odd to me but that's what he said.
+
+extension NSAttributedString {
+    var stringRange: NSRange {
+        return NSMakeRange(0, self.length)
+    }
+}
+extension Story {
+    // Let's style the text. Need to create NSMutableAttributedString then modify its properties.
+    var attributedText: NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: text)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
+        
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: attributedString.stringRange)
+        
+        return attributedString
+        }
+}
+
+// This helper method allows us to chose whether we want a styled string or a plain string
+extension Page {
+    func story(attributed: Bool) -> NSAttributedString {
+        if attributed {
+            return story.attributedText
+        } else {
+            return NSAttributedString(string: story.text)
+        }
+    }
+}
+
+
+
+
 class PageController: UIViewController {
     
     var page: Page? //Pasan goes on at length explaining why this is an optional, even though we always require it, but the explanation was lost on me.
@@ -59,15 +94,8 @@ class PageController: UIViewController {
         
         if let page = page {
             artworkView.image = page.story.artwork
-            // Let's style the text. Need to create NSMutableAttributedString then modify its properties.
-            let attributedString = NSMutableAttributedString(string: page.story.text)
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 10
-            
-            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
-            
-            storyLabel.attributedText = attributedString // Changed from storyLabel.text to .attributedText in order to accept  attributedString (which is instance of NSMutableAttributedString)
+           
+            storyLabel.attributedText = page.story(attributed: true) // Changed from storyLabel.text to .attributedText in order to accept  attributedString (which is instance of NSMutableAttributedString)
             
             if let firstChoice = page.firstChoice {
                 firstChoiceButton.setTitle(firstChoice.title, for: .normal)
