@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		88144A82227A3DD600885609 /* InteractiveStoryTreehouseCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InteractiveStoryTreehouseCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88144A82227A3DD600885609 /* InteractiveStoryTreehouseCourse-Refactored.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "InteractiveStoryTreehouseCourse-Refactored.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88144A85227A3DD600885609 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88144A87227A3DD600885609 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		88144A8A227A3DD600885609 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		88144A83227A3DD600885609 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88144A82227A3DD600885609 /* InteractiveStoryTreehouseCourse.app */,
+				88144A82227A3DD600885609 /* InteractiveStoryTreehouseCourse-Refactored.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		88144A81227A3DD600885609 /* InteractiveStoryTreehouseCourse */ = {
+		88144A81227A3DD600885609 /* InteractiveStoryTreehouseCourse-Refactored */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 88144A94227A3DD700885609 /* Build configuration list for PBXNativeTarget "InteractiveStoryTreehouseCourse" */;
+			buildConfigurationList = 88144A94227A3DD700885609 /* Build configuration list for PBXNativeTarget "InteractiveStoryTreehouseCourse-Refactored" */;
 			buildPhases = (
 				88144A7E227A3DD600885609 /* Sources */,
 				88144A7F227A3DD600885609 /* Frameworks */,
@@ -88,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = InteractiveStoryTreehouseCourse;
+			name = "InteractiveStoryTreehouseCourse-Refactored";
 			productName = InteractiveStoryTreehouseCourse;
-			productReference = 88144A82227A3DD600885609 /* InteractiveStoryTreehouseCourse.app */;
+			productReference = 88144A82227A3DD600885609 /* InteractiveStoryTreehouseCourse-Refactored.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -108,7 +108,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 88144A7D227A3DD600885609 /* Build configuration list for PBXProject "InteractiveStoryTreehouseCourse" */;
+			buildConfigurationList = 88144A7D227A3DD600885609 /* Build configuration list for PBXProject "InteractiveStoryTreehouseCourse-Refactored" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -121,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				88144A81227A3DD600885609 /* InteractiveStoryTreehouseCourse */,
+				88144A81227A3DD600885609 /* InteractiveStoryTreehouseCourse-Refactored */,
 			);
 		};
 /* End PBXProject section */
@@ -329,7 +329,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		88144A7D227A3DD600885609 /* Build configuration list for PBXProject "InteractiveStoryTreehouseCourse" */ = {
+		88144A7D227A3DD600885609 /* Build configuration list for PBXProject "InteractiveStoryTreehouseCourse-Refactored" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				88144A92227A3DD700885609 /* Debug */,
@@ -338,7 +338,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		88144A94227A3DD700885609 /* Build configuration list for PBXNativeTarget "InteractiveStoryTreehouseCourse" */ = {
+		88144A94227A3DD700885609 /* Build configuration list for PBXNativeTarget "InteractiveStoryTreehouseCourse-Refactored" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				88144A95227A3DD700885609 /* Debug */,

@@ -14,10 +14,34 @@ class PageController: UIViewController {
     
     // MARK: - User Interface Properties
     
-    let artworkView = UIImageView()
-    let storyLabel = UILabel()
-    let firstChoiceButton = UIButton(type: .system)
-    let secondChoiceButton = UIButton(type: .system)
+    let artworkView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false // This overrides autolayouts inferred constraints.
+        return imageView
+    }()
+    
+    
+    
+    let storyLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0 // This allows the lines to wrap
+        return label
+    }()
+    
+    let firstChoiceButton: UIButton = {
+       let button = UIButton(type: .system)
+       button.translatesAutoresizingMaskIntoConstraints = false
+       return button
+    }()
+    
+    let secondChoiceButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -65,8 +89,7 @@ class PageController: UIViewController {
     // When ViewController's view is initialized, it checks to see if it has any subviews. It includes the viewWillLayoutSubviews method (or was it viewDidLayoutSubviews?), which, by default, does nothing, but we can override it to add subviews, that the View will create as it cycles through it's subview setup.
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews() // notice we call the superclass first, and we've already called super.viewDidLoad()
-        view.addSubview(artworkView) // This is how we add a subview.
-        artworkView.translatesAutoresizingMaskIntoConstraints = false // This overrides autolayouts inferred constraints.
+        view.addSubview(artworkView) // This is how we add a subview..
         
         //  artworkView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true // this sets the topAnchor of the artworkView subView to the topAnchor of the View, and makes it active. We could do this for every parameter, but it would get tedious. It's more efficient to use NSLayoutContraint.activate, and pass in an array of constraints. This is how we activate and constrain the subview we just added.
         NSLayoutConstraint.activate([
@@ -77,9 +100,7 @@ class PageController: UIViewController {
             ])
         
         view.addSubview(storyLabel)
-        storyLabel.numberOfLines = 0
-        storyLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+       
         NSLayoutConstraint.activate([
             storyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
             storyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0),
@@ -87,7 +108,6 @@ class PageController: UIViewController {
             ])
         
         view.addSubview(firstChoiceButton)
-        firstChoiceButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             firstChoiceButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -95,7 +115,6 @@ class PageController: UIViewController {
             ])
        
         view.addSubview(secondChoiceButton)
-        secondChoiceButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             secondChoiceButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
