@@ -55,6 +55,7 @@ class PageController: UIViewController {
             
             if let secondChoice = page.secondChoice {
                 secondChoiceButton.setTitle(secondChoice.title, for: .normal)
+                secondChoiceButton.addTarget(self, action: #selector(PageController.loadSecondChoice), for: .touchUpInside)
             } 
             
         }
@@ -121,7 +122,7 @@ class PageController: UIViewController {
     }
     
     // Why doesn't this method need @objc ? Oh, prob. cause I haven't connected it to a button yet.
-    func loadSecondChoice() {
+    @objc func loadSecondChoice() {
         if let page = page, let secondChoice = page.secondChoice {
             let nextPage = secondChoice.page
             let pageController = PageController(page: nextPage)
