@@ -31,6 +31,8 @@ class PageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white // need to manually set this since the subsequent views are loading programmatically, rather than from a storyboard, which provides some default settings (such as a white background.)
+        
         if let page = page {
             artworkView.image = page.story.artwork
             // Let's style the text. Need to create NSMutableAttributedString then modify its properties.
@@ -45,6 +47,7 @@ class PageController: UIViewController {
             
             if let firstChoice = page.firstChoice {
                 firstChoiceButton.setTitle(firstChoice.title, for: .normal)
+                firstChoiceButton.addTarget(self, action: #selector(PageController.loadFirstChoice), for: .touchUpInside)//We've manually added a target (self, i.e. this ViewController) and an action (the loadFirstChoice(). This is Target/action pattern.
             } else {
                 firstChoiceButton.setTitle("Play Again", for: .normal)
             }
@@ -97,6 +100,34 @@ class PageController: UIViewController {
             secondChoiceButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32.0)
             ])
     }
+    
+    // Create helper methods to attach to buttons
+    @objc func loadFirstChoice() {
+        if let page = page, let firstChoice = page.firstChoice {
+            let nextPage = firstChoice.page
+            let pageController = PageController(page: nextPage)
+            
+            /*Every view controller has an optional property, navigation controller.
+             If your view controller is part of a navigation stack,
+             this property refers to the navigation controller that we're embedded in.
+             Using this property we can ask the navigation controller
+             to push another view controller onto the stack.
+             This is IDENTICAL behavior to the SEGUE that we created in the storyboard scene.
+             Except here we're calling it explicitly and
+             passing in the view controller as a parameter or as an argument.*/
+            navigationController?.pushViewController(pageController, animated: true)
+        }
+    }
+    
+    func loadSecondChoice() {
+        if let page = page, let secondChoice = page.secondChoice {
+            let nextPage = secondChoice.page
+            let pageController = PageController(page: nextPage)
+            
+            navigationController?.pushViewController(pageController, animated: true)
+        }
+    }
+    
 }
 
 
