@@ -67,15 +67,27 @@ class PageController: UIViewController {
         return label
     }()
     
-    let firstChoiceButton: UIButton = {
+    lazy var firstChoiceButton: UIButton = {
        let button = UIButton(type: .system)
        button.translatesAutoresizingMaskIntoConstraints = false
+       //Let's use the nil coalescing operator! If value on left exists, use it, otherwise use value on right.
+       let title = self.page?.firstChoice?.title ?? "Play Again"
+        //and now let's try Ternary Conditional Operator! The Boolean check is on the left of ?, followed by the true case, then :, then the false case
+       let selector = self.page?.firstChoice != nil ? #selector(PageController.loadFirstChoice) : #selector(PageController.playAgain)
+       
+        button.setTitle(title, for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        
        return button
     }()
     
-    let secondChoiceButton: UIButton = {
+    lazy var secondChoiceButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.setTitle(self.page?.secondChoice?.title, for: .normal)
+        button.addTarget(self, action: #selector(PageController.loadSecondChoice), for: .touchUpInside)
+        
         return button
     }()
     
@@ -94,24 +106,6 @@ class PageController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white // need to manually set this since the subsequent views are loading programmatically, rather than from a storyboard, which provides some default settings (such as a white background.)
-        
-        if let page = page {
-            
-            if let firstChoice = page.firstChoice {
-                firstChoiceButton.setTitle(firstChoice.title, for: .normal)
-                firstChoiceButton.addTarget(self, action: #selector(PageController.loadFirstChoice), for: .touchUpInside)//We've manually added a target (self, i.e. this ViewController) and an action (the loadFirstChoice(). This is Target/action pattern.
-            } else {
-                firstChoiceButton.setTitle("Play Again", for: .normal)
-                firstChoiceButton.addTarget(self, action: #selector(PageController.playAgain), for: .touchUpInside)
-            }
-            
-            if let secondChoice = page.secondChoice {
-                secondChoiceButton.setTitle(secondChoice.title, for: .normal)
-                secondChoiceButton.addTarget(self, action: #selector(PageController.loadSecondChoice), for: .touchUpInside)
-            } 
-            
-        }
-        // Do any additional setup after loading the view.
     }
     
     // When ViewController's view is initialized, it checks to see if it has any subviews. It includes the viewWillLayoutSubviews method (or was it viewDidLayoutSubviews?), which, by default, does nothing, but we can override it to add subviews, that the View will create as it cycles through it's subview setup.
