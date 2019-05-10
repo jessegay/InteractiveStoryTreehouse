@@ -58,10 +58,12 @@ class PageController: UIViewController {
     
     
     
-    let storyLabel: UILabel = {
+    lazy var storyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0 // This allows the lines to wrap
+        label.attributedText = self.page?.story(attributed: true)
+        
         return label
     }()
     
@@ -94,9 +96,6 @@ class PageController: UIViewController {
         view.backgroundColor = .white // need to manually set this since the subsequent views are loading programmatically, rather than from a storyboard, which provides some default settings (such as a white background.)
         
         if let page = page {
-            
-           
-            storyLabel.attributedText = page.story(attributed: true) // Changed from storyLabel.text to .attributedText in order to accept  attributedString (which is instance of NSMutableAttributedString)
             
             if let firstChoice = page.firstChoice {
                 firstChoiceButton.setTitle(firstChoice.title, for: .normal)
