@@ -48,10 +48,11 @@ class PageController: UIViewController {
     var page: Page? //Pasan goes on at length explaining why this is an optional, even though we always require it, but the explanation was lost on me.
     
     // MARK: - User Interface Properties
-    
-    let artworkView: UIImageView = {
+    //Changing artworkView from let to lazy var allows us to access page even though it doesn't exist until the class is initialized (I'm fuzzy on this)
+    lazy var artworkView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false // This overrides autolayouts inferred constraints.
+        imageView.image = self.page?.story.artwork
         return imageView
     }()
     
@@ -93,7 +94,7 @@ class PageController: UIViewController {
         view.backgroundColor = .white // need to manually set this since the subsequent views are loading programmatically, rather than from a storyboard, which provides some default settings (such as a white background.)
         
         if let page = page {
-            artworkView.image = page.story.artwork
+            
            
             storyLabel.attributedText = page.story(attributed: true) // Changed from storyLabel.text to .attributedText in order to accept  attributedString (which is instance of NSMutableAttributedString)
             
